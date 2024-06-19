@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrQkzMjkxhPLXozWq+k5Y5FhK6kO96+0GZ3jnS7cb2XSYp5QRSJLRwZ+VO5c6eswA5iTcH0dXxP+5cLfWw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Soft black background color */
+            color: #ffffff; /* Text color for better contrast */
+            position: relative;
+            overflow: hidden; /* Prevent scrolling */
+        }
+        .content {
+            display: flex;
+            align-items: center;
+        }
+        .container {
+            width: 500px; /* Increased width */
+            height: 740px; /* Increased height */
+            transition: all 0.1s;
+            position: relative;
+            margin-right: 200px; /* Move the card to the right */
+        }
+        .overlay {
+            position: absolute;
+            width: 500px; /* Increased width */
+            height: 740px; /* Increased height */
+            background: linear-gradient(105deg, transparent 40%, rgba(255, 219, 112, 0.8) 45%, rgba(132, 50, 255, 0.6) 50%, transparent 54%);
+            filter: brightness(1.1) opacity(0.8);
+            mix-blend-mode: color-dodge;
+            background-size: 150% 150%;
+            background-position: 100%;
+            transition: all 0.1s;
+        }
+        .card {
+            width: 500px; /* Increased width */
+            height: 740px; /* Increased height */
+            background-image: url(card.png);
+            background-size: cover;
+        }
+        .text-section {
+            width: 640px;
+            font-size: 30px;
+            color: #ffffff; /* Text color for better contrast */
+            transition: transform 0.1s;
+        }
+        .social-icons {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .social-icons a {
+            display: block;
+            width: 60px; /* Increased width */
+            height: 60px; /* Increased height */
+            transition: transform 0.1s;
+        }
+        .social-icons img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="overlay"></div>
+            <div class="card"></div>
+        </div>
+        <div class="text-section">
+            <h2>강현빈 : Kang Hyun Been</h2>
+            <p>새로운 기술을 받아드리며 더욱 더 점진적으로 성장하여 IT분야의 최고 종사자가 되도록하겠습니다. 또한 실패에 자책하지 않으며 다시 한번 더 도전하는 사람이 되겠습니다.</p>
+            <p>I will accept new technologies and grow more and more to become the best IT staff. and not blame ourselves for failure and will be the ones who challenge again.</p>
+            <p>감사합니다. Thank you</p>
+        </div>
+    </div>
+    <div class="social-icons">
+        <a href="https://monsterhunter060628.tistory.com/" target="_blank"><img src="tistroy.png" alt="Tistory"></a>
+        <a href="https://github.com/Kanghb0628/" target="_blank"><img src="github.png" alt="GitHub"></a>
+    </div>
+
+    <script>
+        var container = document.querySelector('.container');
+        var overlay = document.querySelector('.overlay');
+        var textSection = document.querySelector('.text-section');
+        var socialIcons = document.querySelector('.social-icons');
+        
+        container.addEventListener('mousemove', function(e) {
+            var x = e.offsetX;
+            var y = e.offsetY;
+            var rotateY = -1 / 15 * x + 10; // Further reduced movement scale for rotateY
+            var rotateX = 1 / 30 * y - 10;  // Further reduced movement scale for rotateX
+
+            overlay.style.backgroundPosition = `${x / 5 + y / 5}%`;
+            overlay.style.filter = `opacity(${x / 200}) brightness(1.2)`;
+
+            container.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            textSection.style.transform = `translateX(${x / 30}px) translateY(${y / 30}px)`;
+            socialIcons.style.transform = `translateX(${x / 30}px) translateY(${y / 30}px)`;
+        });
+
+        container.addEventListener('mouseout', function() {
+            overlay.style.filter = 'opacity(0)';
+            container.style.transform = 'perspective(350px) rotateY(0deg) rotateX(0deg)';
+            textSection.style.transform = 'translateX(0) translateY(0)';
+            socialIcons.style.transform = 'translateX(0) translateY(0)';
+        });
+    </script>
+</body>
+</html>
